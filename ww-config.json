@@ -5,49 +5,11 @@
     },
     "editor": {
         "label": {
-            "en": "Hover dropdown"
+            "en": "Click dropdown"
         },
         "menuOptions": {},
-        "styleOptions": {
-            "position": {
-                "label": {
-                    "en": "Position",
-                    "fr": "Position"
-                },
-                "type": "TextSelect",
-                "options": {
-                    "options": [
-                        { "value": "center", "label": { "en": "Center of the screen", "fr": "Center of the screen" } },
-                        { "value": "under", "label": { "en": "Under the dropdown" } }
-                    ]
-                }
-            }
-        },
+        "styleOptions": {},
         "settingsOptions": {
-            "trigger": {
-                "label": {
-                    "en": "Show on",
-                    "fr": "Show on"
-                },
-                "type": "TextSelect",
-                "options": {
-                    "options": [
-                        { "value": "mouseenter", "label": { "en": "Hover", "fr": "Hover" } },
-                        { "value": "click", "label": { "en": "Click" } }
-                    ]
-                }
-            },
-            "menuBreakpoint": {
-                "label": { "en": "Mobile view starting at" },
-                "type": "TextRadioGroup",
-                "options": {
-                    "choices": [
-                        { "value": "laptop", "title": { "en": "Laptop" }, "icon": "laptop" },
-                        { "value": "tablet", "title": { "en": "Tablet" }, "icon": "tablet" },
-                        { "value": "mobile", "title": { "en": "Mobile" }, "icon": "mobile" }
-                    ]
-                }
-            },
             "toggleEdit": {
                 "type": "Button",
                 "options": {

@@ -1,8 +1,8 @@
 {
-    "name": "ww-hover-dropdown",
+    "name": "click-dropdown",
     "repository": {
         "type": "git",
-        "url": "https://github.com/weweb-assets/ww-hover-dropdown"
+        "url": "https://github.com/weweb-assets/click-dropdown"
     },
     "version": "0.0.1",
     "license": "MIT",
