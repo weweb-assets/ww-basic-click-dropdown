@@ -1,9 +1,9 @@
 <template>
-    <div class="dropdown" ref="dropdownElement" ww-responsive="dropdown" @click.stop>
+    <div ref="dropdownElement" class="dropdown" ww-responsive="dropdown" @click.stop>
         <div class="dropdown-default">
             <div class="dropdown-hover-trigger" @click="showDropdown">
                 <wwLayout class="dropdown__layout" path="dropdown">
-                    <template v-slot="{ item }">
+                    <template #default="{ item }">
                         <wwLayoutItem>
                             <wwObject v-bind="item" :states="states"></wwObject>
                         </wwLayoutItem>
@@ -18,8 +18,8 @@
                 @mouseleave="isMouseInHandler(false)"
             >
                 <transition name="fade" mode="out-in">
-                    <wwLayout class="layout" ref="dropdownContent" path="dropdownContent">
-                        <template v-slot="{ item }">
+                    <wwLayout ref="dropdownContent" class="layout" path="dropdownContent">
+                        <template #default="{ item }">
                             <wwLayoutItem>
                                 <wwObject v-bind="item" :states="states"></wwObject>
                             </wwLayoutItem>
@@ -34,10 +34,10 @@
 <script>
 export default {
     props: {
-        content: Object,
-        wwFrontState: Object,
+        content: { type: Object, required: true },
+        wwFrontState: { type: Object, required: true },
         /* wwEditor:start */
-        wwEditorState: Object,
+        wwEditorState: { type: Object, required: true },
         /* wwEditor:end */
     },
     wwDefaultContent: {
@@ -59,14 +59,6 @@ export default {
             isMouseIn: false,
         };
     },
-    watch: {
-        isEditing() {
-            if (!this.isEditing) {
-                this.isVisible = false;
-                this.isContentEdit = false;
-            }
-        },
-    },
     computed: {
         isEditing() {
             /* wwEditor:start */
@@ -76,26 +68,12 @@ export default {
             return false;
         },
     },
-    methods: {
-        showDropdown() {
-            if (this.isVisible) {
+    watch: {
+        isEditing() {
+            if (!this.isEditing) {
                 this.isVisible = false;
-                this.states = [''];
-                return;
+                this.isContentEdit = false;
             }
-
-            wwLib.$emit('ww-click-dropdown:opened');
-            this.isVisible = true;
-            this.states = ['active'];
-        },
-        toggleEdit() {
-            this.isContentEdit = !this.isContentEdit;
-        },
-        updatePosition() {
-            this.topPosition = this.dropdown.getBoundingClientRect().top;
-        },
-        isMouseInHandler(value) {
-            this.isMouseIn = value;
         },
     },
     mounted() {
@@ -110,8 +88,31 @@ export default {
             this.isVisible = false;
         });
     },
-    beforeDestroy() {
+    unmounted() {
         wwLib.$off('ww-click-dropdown:opened');
+    },
+    methods: {
+        showDropdown() {
+            if (this.isVisible) {
+                this.isVisible = false;
+                this.states = [''];
+                return;
+            }
+
+            // eslint-disable-next-line vue/custom-event-name-casing
+            wwLib.$emit('ww-click-dropdown:opened');
+            this.isVisible = true;
+            this.states = ['active'];
+        },
+        toggleEdit() {
+            this.isContentEdit = !this.isContentEdit;
+        },
+        updatePosition() {
+            this.topPosition = this.dropdown.getBoundingClientRect().top;
+        },
+        isMouseInHandler(value) {
+            this.isMouseIn = value;
+        },
     },
 };
 </script>
