@@ -43,10 +43,6 @@ export default {
     wwDefaultContent: {
         dropdown: [],
         dropdownContent: [],
-        menuBreakpoint: 'mobile',
-        contentWidth: '80vw',
-        position: 'under',
-        trigger: 'mouseenter',
     },
     data() {
         return {
